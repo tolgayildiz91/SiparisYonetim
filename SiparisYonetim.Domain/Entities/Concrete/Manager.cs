@@ -9,5 +9,6 @@ namespace SiparisYonetim.Domain.Entities.Concrete
     public class Manager:AppUser
     {
         public int BranchID { get; set; }
+        public Branch Branch { get; set; }
     }
 }
