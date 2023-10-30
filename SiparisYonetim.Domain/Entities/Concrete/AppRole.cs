@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace SiparisYonetim.Domain.Entities.Concrete
 {
-    public class Manager:AppUser
+    public class AppRole:IdentityRole<Guid>
     {
-        public int BranchID { get; set; }
     }
 }
