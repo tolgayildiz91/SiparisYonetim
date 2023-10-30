@@ -1,6 +1,7 @@
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SiparisYonetim.Application;
 using SiparisYonetim.Domain.Entities.Concrete;
 using SiparisYonetim.Infrastructure.DataAccess;
 
@@ -15,6 +16,13 @@ namespace SiparisYonetim.Presentation
             // Add services to the container.
             builder.Services.AddDbContext<SiparisYonetimDBContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("dbConnection")));
             builder.Services.AddControllers();
+
+
+            builder.Services.AddApplicationServices();
+
+
+
+
 
             builder.Services.AddIdentity<AppUser, AppRole>(options =>
             {

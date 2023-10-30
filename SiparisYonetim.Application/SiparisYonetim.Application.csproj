@@ -10,4 +10,24 @@
     <ProjectReference Include="..\SiparisYonetim.Domain\SiparisYonetim.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Manager\Rules\" />
+    <Folder Include="Features\Manager\Queries\" />
+    <Folder Include="Features\Manager\Profiles\" />
+    <Folder Include="Features\Roles\Commands\" />
+    <Folder Include="Features\Roles\Queries\" />
+    <Folder Include="Features\Roles\Profiles\" />
+    <Folder Include="Features\Users\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.8.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+  </ItemGroup>
+
 </Project>
