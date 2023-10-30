@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SiparisYonetim.Domain\SiparisYonetim.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

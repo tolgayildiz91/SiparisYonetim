@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SiparisYonetim.Domain.Entities.Abstract
+namespace SiparisYonetim.Domain.Entities.Concrete
 {
-    public interface IEntity<T>
+    public class Admin:AppUser
     {
-        public T ID { get; set; }
     }
 }
