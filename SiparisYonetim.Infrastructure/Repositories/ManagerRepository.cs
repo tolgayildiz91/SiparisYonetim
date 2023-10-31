@@ -19,11 +19,13 @@ namespace SiparisYonetim.Infrastructure.Repositories
         private readonly UserManager<AppUser> _userManager;
         protected DbSet<Manager> _table;
 
-        public ManagerRepository(SiparisYonetimDBContext dbContext, DbSet<Manager> table, UserManager<AppUser> userManager)
+            public ManagerRepository(SiparisYonetimDBContext dbContext, UserManager<AppUser> userManager)
         {
             _dbContext = dbContext;
             _table = _dbContext.Set<Manager>();
             _userManager = userManager;
+
+
         }
 
         public async Task<bool> Any(Expression<Func<Manager, bool>> expression)

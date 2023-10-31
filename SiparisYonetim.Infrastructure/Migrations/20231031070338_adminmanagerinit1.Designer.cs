@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiparisYonetim.Infrastructure.DataAccess;
 
@@ -11,9 +12,11 @@ using SiparisYonetim.Infrastructure.DataAccess;
 namespace SiparisYonetim.Infrastructure.Migrations
 {
     [DbContext(typeof(SiparisYonetimDBContext))]
-    partial class SiparisYonetimDBContextModelSnapshot : ModelSnapshot
+    [Migration("20231031070338_adminmanagerinit1")]
+    partial class adminmanagerinit1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -15,8 +15,8 @@ namespace SiparisYonetim.Domain.Entities.Concrete
 
 
 
-        public virtual List<Admin> Managers { get; set; }
-        public Guid ManagerId { get; set; }
+        //public virtual List<Admin> Managers { get; set; }
+        //public Guid ManagerId { get; set; }
 
 
         public string CreatedBy { get; set; }

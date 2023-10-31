@@ -1,6 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using SiparisYonetim.Application.Services.AdminService;
+using SiparisYonetim.Application.Services.ManagerService;
+using SiparisYonetim.Application.Services.UserService;
+using SiparisYonetim.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +23,17 @@ namespace SiparisYonetim.Application
             services.AddAutoMapper(typeof(ApplicationServiceRegistration));
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+
+
+            services.AddScoped<IUserService,UserManager>();
+            services.AddScoped<IAdminService,AdminManager>();
+            services.AddScoped<IManagerService, ManagerManager>();
+           
+
+
+
+
 
 
         }

@@ -26,7 +26,7 @@ namespace SiparisYonetim.Infrastructure.DataAccess
         {
             optionsBuilder.UseLazyLoadingProxies();
 
-           
+
 
 
             base.OnConfiguring(optionsBuilder);

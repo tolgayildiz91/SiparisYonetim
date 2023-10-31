@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiparisYonetim.Infrastructure.DataAccess;
 
@@ -11,9 +12,11 @@ using SiparisYonetim.Infrastructure.DataAccess;
 namespace SiparisYonetim.Infrastructure.Migrations
 {
     [DbContext(typeof(SiparisYonetimDBContext))]
-    partial class SiparisYonetimDBContextModelSnapshot : ModelSnapshot
+    [Migration("20231031065933_adminmanagerinit")]
+    partial class adminmanagerinit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,6 +282,9 @@ namespace SiparisYonetim.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("ManagerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -297,6 +303,11 @@ namespace SiparisYonetim.Infrastructure.Migrations
                 {
                     b.HasBaseType("SiparisYonetim.Domain.Entities.Concrete.AppUser");
 
+                    b.Property<int?>("BranchID")
+                        .HasColumnType("int");
+
+                    b.HasIndex("BranchID");
+
                     b.ToTable("Admin", (string)null);
                 });
 
@@ -307,7 +318,10 @@ namespace SiparisYonetim.Infrastructure.Migrations
                     b.Property<int>("BranchID")
                         .HasColumnType("int");
 
-                    b.HasIndex("BranchID");
+                    b.Property<int>("BranchID1")
+                        .HasColumnType("int");
+
+                    b.HasIndex("BranchID1");
 
                     b.ToTable("Managers", (string)null);
                 });
@@ -365,6 +379,10 @@ namespace SiparisYonetim.Infrastructure.Migrations
 
             modelBuilder.Entity("SiparisYonetim.Domain.Entities.Concrete.Admin", b =>
                 {
+                    b.HasOne("SiparisYonetim.Domain.Entities.Concrete.Branch", null)
+                        .WithMany("Managers")
+                        .HasForeignKey("BranchID");
+
                     b.HasOne("SiparisYonetim.Domain.Entities.Concrete.AppUser", null)
                         .WithOne()
                         .HasForeignKey("SiparisYonetim.Domain.Entities.Concrete.Admin", "Id")
@@ -376,7 +394,7 @@ namespace SiparisYonetim.Infrastructure.Migrations
                 {
                     b.HasOne("SiparisYonetim.Domain.Entities.Concrete.Branch", "Branch")
                         .WithMany()
-                        .HasForeignKey("BranchID")
+                        .HasForeignKey("BranchID1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -387,6 +405,11 @@ namespace SiparisYonetim.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Branch");
+                });
+
+            modelBuilder.Entity("SiparisYonetim.Domain.Entities.Concrete.Branch", b =>
+                {
+                    b.Navigation("Managers");
                 });
 #pragma warning restore 612, 618
         }
