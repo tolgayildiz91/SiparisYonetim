@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using SiparisYonetim.Application.Features.Manager.DTOs;
+using SiparisYonetim.Application.Features.Users.DTOs;
 using SiparisYonetim.Application.Results;
 using SiparisYonetim.Application.Services.ManagerService;
 using System;
@@ -13,7 +14,7 @@ namespace SiparisYonetim.Application.Features.Manager.Commands
 {
     public class UpdateManagerCommand:IRequest<IResult>
     {
-        public ManagerDTO ManagerDTO { get; set; }
+        public UpdateManagerDTO ManagerDTO { get; set; }
 
 
         public class UpdateManagerCommandHandler : IRequestHandler<UpdateManagerCommand, IResult>
@@ -29,7 +30,8 @@ namespace SiparisYonetim.Application.Features.Manager.Commands
 
             public async Task<IResult> Handle(UpdateManagerCommand request, CancellationToken cancellationToken)
             {
-                var result = await _managerService.UpdateManagerAsync(request.ManagerDTO);
+              
+                var result = await _managerService.UpdateManagerAsync(_mapper.Map<ManagerDTO>(request));
                 if (result)
                 {
                     return new SuccessResult();

@@ -14,7 +14,6 @@
     <Folder Include="Features\Admin\Rules\" />
     <Folder Include="Features\Admin\Queries\" />
     <Folder Include="Features\Manager\Rules\" />
-    <Folder Include="Features\Manager\Queries\" />
     <Folder Include="Features\Roles\Commands\" />
     <Folder Include="Features\Roles\Queries\" />
     <Folder Include="Features\Roles\Profiles\" />

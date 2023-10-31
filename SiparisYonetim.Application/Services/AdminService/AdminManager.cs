@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using SiparisYonetim.Application.Features.Admin.DTOs;
 using SiparisYonetim.Application.Features.Manager.DTOs;
+using SiparisYonetim.Application.Features.Users.DTOs;
 using SiparisYonetim.Application.Services.ManagerService;
 using SiparisYonetim.Domain.Entities.Concrete;
 using SiparisYonetim.Domain.IRepositories;
@@ -90,6 +91,7 @@ namespace SiparisYonetim.Application.Services.AdminService
 
         public async Task<bool> UpdateAdminAsync(AdminDTO adminDTO, bool IsActive = true)
         {
+            adminDTO.ModifiedDate = DateTime.Now;
             return await _adminRepository.UpdateAdminAsync(_mapper.Map<Admin>(adminDTO), IsActive);
         }
     }

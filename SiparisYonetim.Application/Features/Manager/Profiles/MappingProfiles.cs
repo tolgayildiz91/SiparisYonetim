@@ -14,6 +14,8 @@ namespace SiparisYonetim.Application.Features.Manager.Profiles
         {
             CreateMap<Domain.Entities.Concrete.Manager, CreateManagerDTO>().ReverseMap();
             CreateMap<Domain.Entities.Concrete.Manager, ManagerDTO>().ReverseMap();
+            CreateMap<Domain.Entities.Concrete.Manager, UpdateManagerDTO>().ReverseMap();
+            CreateMap<ManagerDTO, UpdateManagerDTO>().ReverseMap();
         }
     }
 }
