@@ -13,10 +13,8 @@
   <ItemGroup>
     <Folder Include="Features\Admin\Rules\" />
     <Folder Include="Features\Admin\Queries\" />
-    <Folder Include="Features\Admin\Profiles\" />
     <Folder Include="Features\Manager\Rules\" />
     <Folder Include="Features\Manager\Queries\" />
-    <Folder Include="Features\Manager\Profiles\" />
     <Folder Include="Features\Roles\Commands\" />
     <Folder Include="Features\Roles\Queries\" />
     <Folder Include="Features\Roles\Profiles\" />
@@ -28,9 +26,13 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="FluentValidation" Version="11.8.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
-    <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="MediatR" Version="11.0.0" />
     <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

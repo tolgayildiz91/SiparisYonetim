@@ -20,7 +20,7 @@ namespace SiparisYonetim.Infrastructure.Repositories
         private readonly UserManager<AppUser> _userManager;
         protected DbSet<Admin> _table;
 
-        public AdminRepository(SiparisYonetimDBContext dbContext, UserManager<AppUser> userManager, DbSet<Admin> table)
+        public AdminRepository(SiparisYonetimDBContext dbContext, UserManager<AppUser> userManager)
         {
             _dbContext = dbContext;
             _userManager = userManager;

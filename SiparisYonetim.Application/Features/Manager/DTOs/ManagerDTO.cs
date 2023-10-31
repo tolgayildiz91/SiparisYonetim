@@ -18,8 +18,8 @@ namespace SiparisYonetim.Application.Features.Manager.DTOs
         public string? Picture { get; set; }
         public string FirstName { get; set; }
         public string? SecondFirstName { get; set; }
-        public string? LastName { get; set; }
-        public string SecondLastName { get; set; }
+        public string LastName { get; set; }
+        public string? SecondLastName { get; set; }
         public Gender? Gender { get; set; }
 
 

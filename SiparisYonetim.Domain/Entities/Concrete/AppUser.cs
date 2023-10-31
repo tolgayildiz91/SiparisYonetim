@@ -9,8 +9,8 @@ namespace SiparisYonetim.Domain.Entities.Concrete
         public string? Picture { get; set ; }
         public string FirstName { get; set; }
         public string? SecondFirstName { get; set; }
-        public string? LastName { get; set; }
-        public string SecondLastName { get; set; }
+        public string LastName { get; set; }
+        public string? SecondLastName { get; set; }
         public Gender? Gender { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
