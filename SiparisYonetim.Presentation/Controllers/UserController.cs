@@ -12,7 +12,10 @@ namespace SiparisYonetim.Presentation.Controllers
     [ApiController]
     public class UserController : BaseController
     {
-    
+
+
+
+        #region Manager
 
         [HttpPost]
         public async Task<IActionResult> CreateManager(CreateManagerDTO createManagerDTO)
@@ -28,6 +31,36 @@ namespace SiparisYonetim.Presentation.Controllers
         }
 
 
+        [HttpPut]
+        public async Task<IActionResult> UpdateManager(UpdateManagerDTO updateManagerDTO)
+        {
+
+            var result = await Mediator.Send(new UpdateManagerCommand() { ManagerDTO=updateManagerDTO });
+
+            if (result.Success) 
+            {
+                return Ok();
+            }
+            return BadRequest();
+
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetManagerByID()
+        {
+            return Ok();
+        }
+
+
+
+
+        #endregion
+
+
+
+        #region Admin
+
 
         [HttpPost]
         public async Task<IActionResult> CreateAdmin(CreateAdminDTO createAdminDTO)
@@ -41,6 +74,15 @@ namespace SiparisYonetim.Presentation.Controllers
 
             return BadRequest();
         }
+
+
+        #endregion
+
+
+
+
+
+
 
 
     }
