@@ -50,7 +50,7 @@ namespace SiparisYonetim.Infrastructure.Repositories
             return await GetAdminId(AppUserResult.Id.ToString());
         }
 
-        public Task<string> GeneratePassword()
+        public async Task<string> GeneratePassword()
         {
             const string UppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             const string LowercaseChars = "abcdefghijklmnopqrstuvwxyz";
@@ -101,6 +101,14 @@ namespace SiparisYonetim.Infrastructure.Repositories
                 return true;
             }
             return false;
+        }
+
+        public async Task<bool> AddAsync(Admin item)
+        {
+
+            await _userManager.CreateAsync(item, await GeneratePassword());
+            await _dbContext.SaveChangesAsync();
+            return true;
         }
     }
 }

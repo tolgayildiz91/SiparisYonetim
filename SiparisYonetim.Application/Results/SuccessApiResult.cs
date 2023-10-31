@@ -15,4 +15,5 @@ namespace SiparisYonetim.Application.Results
         public SuccessApiResult(bool success, string message, object? values = null) : base(success, message, values)
         {
         }
+    }
 }
