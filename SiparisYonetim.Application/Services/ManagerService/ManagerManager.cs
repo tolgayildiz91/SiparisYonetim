@@ -83,7 +83,7 @@ namespace SiparisYonetim.Application.Services.ManagerService
             return await _managerRepository.FindManagerByNameAsync(username);
         }
 
-        public async Task<Manager> GetUserId(string managerId)
+        public async Task<Manager> GetUserId(Guid managerId)
         {
             return await _managerRepository.GetManagerId(managerId);
         }

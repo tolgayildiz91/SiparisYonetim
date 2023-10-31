@@ -5,6 +5,8 @@ using SiparisYonetim.Application.Features.Admin.Commands;
 using SiparisYonetim.Application.Features.Admin.DTOs;
 using SiparisYonetim.Application.Features.Manager.Commands;
 using SiparisYonetim.Application.Features.Manager.DTOs;
+using SiparisYonetim.Application.Features.Manager.Queries;
+using SiparisYonetim.Application.Results;
 
 namespace SiparisYonetim.Presentation.Controllers
 {
@@ -47,10 +49,30 @@ namespace SiparisYonetim.Presentation.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetManagerByID()
+        public async Task<IActionResult> GetAllManager()
         {
-            return Ok();
+            var result = await Mediator.Send(new GetManagersQuery());
+
+            if (result.Success)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetManagerByID(Guid ID)
+        {
+            var result = await Mediator.Send(new GetManagerByIDQuery() { ID = ID });
+            if (result.Success)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+
 
 
 

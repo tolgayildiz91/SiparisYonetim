@@ -76,7 +76,7 @@ namespace SiparisYonetim.Infrastructure.Repositories
             return await _table.Where(expression).ToListAsync();
         }
 
-        public async Task<Domain.Entities.Concrete.Manager> GetManagerId(string managerId)
+        public async Task<Domain.Entities.Concrete.Manager> GetManagerId(Guid managerId)
         {
            return await _table.FindAsync(managerId);
         }
@@ -95,13 +95,13 @@ namespace SiparisYonetim.Infrastructure.Repositories
         public async Task<Domain.Entities.Concrete.Manager> FindManagerByEmailAsync(string email)
         {
             var AppUserResult = await _userManager.FindByEmailAsync(email);
-            return await GetManagerId(AppUserResult.Id.ToString());
+            return await GetManagerId(AppUserResult.Id);
         }
 
         public async Task<Domain.Entities.Concrete.Manager> FindManagerByNameAsync(string userName)
         {
             var AppUserResult = await _userManager.FindByNameAsync(userName);
-            return await GetManagerId(AppUserResult.Id.ToString());
+            return await GetManagerId(AppUserResult.Id);
         }
 
         public async Task<bool> AddAsync(Manager item)

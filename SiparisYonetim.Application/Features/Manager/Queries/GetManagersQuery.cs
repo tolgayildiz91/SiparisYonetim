@@ -32,8 +32,9 @@ namespace SiparisYonetim.Application.Features.Manager.Queries
             {
 
                 var managerEntity = await _managerService.GetAllManagers();
-
-                return new SuccessDataResult(IEnumerable<ManagerDTO>)
+               
+                IEnumerable<ManagerDTO> managerDTOs = _mapper.Map<IEnumerable<ManagerDTO>>(managerEntity);
+                return new SuccessDataResult<IEnumerable<ManagerDTO>>(managerDTOs);
 
 
 

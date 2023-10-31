@@ -13,7 +13,7 @@ namespace SiparisYonetim.Application.Services.ManagerService
     public interface IManagerService
     {
         Task<List<Manager>> GetAllManagers();
-        Task<Manager> GetUserId(string managerId);
+        Task<Manager> GetUserId(Guid managerId);
         Task<Manager> GetUserByUserName(string username);
         Task<bool> CreateManagerAsync(CreateManagerDTO createManagerDTO);
         Task<bool> AddToRoleAsync(string userName, string roleName);

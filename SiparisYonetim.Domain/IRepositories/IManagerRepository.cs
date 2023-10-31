@@ -14,7 +14,7 @@ namespace SiparisYonetim.Domain.IRepositories
         Task<Manager> FindManagerByEmailAsync(string email);
         Task<Manager> FindManagerByNameAsync(string userName);
         Task<List<Manager>> GetAllManagers();
-        Task<Manager> GetManagerId(string managerId);
+        Task<Manager> GetManagerId(Guid managerId);
         Task<bool> UpdateManagerAsync(Manager manager, bool IsActive = true);
 
 
