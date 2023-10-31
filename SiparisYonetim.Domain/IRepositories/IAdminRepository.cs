@@ -21,5 +21,6 @@ namespace SiparisYonetim.Domain.IRepositories
         Task<string> GeneratePassword();
         Task<List<Admin>> GetDefaults(Expression<Func<Admin, bool>> expression);
         Task<bool> Any(Expression<Func<Admin, bool>> expression);
+        Task<bool> AddAsync(Admin item);
     }
 }

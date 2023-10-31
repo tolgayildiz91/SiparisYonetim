@@ -52,18 +52,7 @@ namespace SiparisYonetim.Application.Services.ManagerService
             try
             {
                 var manager = _mapper.Map<Manager>(createManagerDTO);
-
-                var passwordHasher = new PasswordHasher<Manager>();
-                manager.PasswordHash = passwordHasher.HashPassword(manager, createManagerDTO.Password);
-
-
-
-                var result = await _managerRepository.(manager, createManagerDTO.Password);
-                if (!result.Succeeded)
-                {
-                    return false;
-                }
-                return true;
+                return await _managerRepository.AddAsync(manager);
 
             }
             catch (Exception ex)

@@ -102,10 +102,12 @@ namespace SiparisYonetim.Infrastructure.Repositories
             return await GetManagerId(AppUserResult.Id.ToString());
         }
 
-        public async Task Add(Manager item)
+        public async Task<bool> AddAsync(Manager item)
         {
+
             await _userManager.CreateAsync(item, await GeneratePassword());
             await _dbContext.SaveChangesAsync();
+            return true;
         }
     }
 }
