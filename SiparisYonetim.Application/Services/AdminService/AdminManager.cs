@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SiparisYonetim.Application.Features.Admin.DTOs;
 using SiparisYonetim.Application.Features.Manager.DTOs;
 using SiparisYonetim.Application.Features.Users.DTOs;
 using SiparisYonetim.Application.Services.ManagerService;
 using SiparisYonetim.Domain.Entities.Concrete;
+using SiparisYonetim.Domain.Enums;
 using SiparisYonetim.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -93,6 +95,12 @@ namespace SiparisYonetim.Application.Services.AdminService
         {
             adminDTO.ModifiedDate = DateTime.Now;
             return await _adminRepository.UpdateAdminAsync(_mapper.Map<Admin>(adminDTO), IsActive);
+        }
+
+        public async Task DeleteAdminAsync(AdminDTO adminDto)
+        {
+            adminDto.ModifiedDate = DateTime.Now;
+            await _adminRepository.Delete(_mapper.Map<Admin>(adminDto));
         }
     }
 }

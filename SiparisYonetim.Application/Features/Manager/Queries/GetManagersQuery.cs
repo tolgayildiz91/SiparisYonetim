@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace SiparisYonetim.Application.Features.Manager.Queries
 {
-    public class GetManagersQuery:IRequest<IResult>
+    public class GetManagersQuery:IRequest<IDataResult<IEnumerable<ManagerDTO>>>
     {
         public ManagerDTO ManagerDTO { get; set; }
 
-        public class GetManagersQueryHandler : IRequestHandler<GetManagersQuery, IResult>
+        public class GetManagersQueryHandler : IRequestHandler<GetManagersQuery, IDataResult<IEnumerable<ManagerDTO>>>
         {
 
             IManagerService _managerService;
@@ -28,18 +28,17 @@ namespace SiparisYonetim.Application.Features.Manager.Queries
                 _mapper = mapper;
             }
 
-            public async Task<IResult> Handle(GetManagersQuery request, CancellationToken cancellationToken)
+            public async Task<IDataResult<IEnumerable<ManagerDTO>>> Handle(GetManagersQuery request, CancellationToken cancellationToken)
             {
 
                 var managerEntity = await _managerService.GetAllManagers();
-               
-                IEnumerable<ManagerDTO> managerDTOs = _mapper.Map<IEnumerable<ManagerDTO>>(managerEntity);
-                return new SuccessDataResult<IEnumerable<ManagerDTO>>(managerDTOs);
+
+                return new SuccessDataResult<IEnumerable<ManagerDTO>>(_mapper.Map<IEnumerable<ManagerDTO>>(managerEntity));
 
 
 
 
-            }
+            }     
         }
 
     }

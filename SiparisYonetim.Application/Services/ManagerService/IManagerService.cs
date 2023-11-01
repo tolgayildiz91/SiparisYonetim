@@ -20,7 +20,8 @@ namespace SiparisYonetim.Application.Services.ManagerService
         Task<Manager> FindManagerByNameAsync(string userName);
         Task<Manager> FindManagerByEmailAsync(string email);
         Task<bool> UpdateManagerAsync(ManagerDTO userdto, bool IsActive = true);
-     
+        Task DeleteManagerAsync(ManagerDTO userdto);
+
 
     }
 }

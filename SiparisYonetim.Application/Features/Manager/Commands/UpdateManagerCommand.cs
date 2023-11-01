@@ -31,7 +31,7 @@ namespace SiparisYonetim.Application.Features.Manager.Commands
             public async Task<IResult> Handle(UpdateManagerCommand request, CancellationToken cancellationToken)
             {
               
-                var result = await _managerService.UpdateManagerAsync(_mapper.Map<ManagerDTO>(request));
+                var result = await _managerService.UpdateManagerAsync(_mapper.Map<ManagerDTO>(request.ManagerDTO));
                 if (result)
                 {
                     return new SuccessResult();

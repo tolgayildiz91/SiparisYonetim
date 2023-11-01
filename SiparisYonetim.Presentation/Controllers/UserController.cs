@@ -26,13 +26,11 @@ namespace SiparisYonetim.Presentation.Controllers
             var result = await Mediator.Send(new CreateManagerCommand() { ManagerDTO = createManagerDTO });
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
 
             return BadRequest();
         }
-
-
         [HttpPut]
         public async Task<IActionResult> UpdateManager(UpdateManagerDTO updateManagerDTO)
         {
@@ -41,13 +39,11 @@ namespace SiparisYonetim.Presentation.Controllers
 
             if (result.Success) 
             {
-                return Ok();
+                return Ok(result);
             }
             return BadRequest();
 
         }
-
-
         [HttpGet]
         public async Task<IActionResult> GetAllManager()
         {
@@ -55,25 +51,28 @@ namespace SiparisYonetim.Presentation.Controllers
 
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
             return BadRequest();
         }
-
-
         [HttpGet]
         public async Task<IActionResult> GetManagerByID(Guid ID)
         {
             var result = await Mediator.Send(new GetManagerByIDQuery() { ID = ID });
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
             return BadRequest();
         }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteManager(Guid ID)
+        {
 
+            await Mediator.Send(new DeleteManagerCommand() { ID=ID});
 
-
+            return Ok();
+        }
 
 
 
@@ -87,7 +86,6 @@ namespace SiparisYonetim.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAdmin(CreateAdminDTO createAdminDTO)
         {
-
             var result = await Mediator.Send(new CreateAdminCommand() { AdminDTO = createAdminDTO });
             if (result.Success)
             {
@@ -96,6 +94,22 @@ namespace SiparisYonetim.Presentation.Controllers
 
             return BadRequest();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateAdmin(UpdateAdminDTO updateAdminDTO)
+        {
+            var result = await Mediator.Send(new UpdateAdminCommand() { AdminDTO = updateAdminDTO });
+
+            if (result.Success)
+            {
+                return Ok();
+            }
+            return BadRequest();
+
+        }
+
+
+
 
 
         #endregion

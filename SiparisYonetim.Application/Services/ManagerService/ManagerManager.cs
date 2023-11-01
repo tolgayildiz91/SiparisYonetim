@@ -64,8 +64,8 @@ namespace SiparisYonetim.Application.Services.ManagerService
         public async Task<Manager> FindManagerByEmailAsync(string email)
         {
             return await _managerRepository.FindManagerByEmailAsync(email);
-          
-           
+
+
         }
 
         public async Task<Manager> FindManagerByNameAsync(string userName)
@@ -90,8 +90,15 @@ namespace SiparisYonetim.Application.Services.ManagerService
 
         public async Task<bool> UpdateManagerAsync(ManagerDTO userdto, bool IsActive = true)
         {
-            userdto.ModifiedDate= DateTime.Now;
+            userdto.ModifiedDate = DateTime.Now;
             return await _managerRepository.UpdateManagerAsync(_mapper.Map<Manager>(userdto), IsActive);
+        }
+
+
+        public async Task DeleteManagerAsync(ManagerDTO userdto)
+        {
+            userdto.ModifiedDate = DateTime.Now;
+            await _managerRepository.Delete(_mapper.Map<Manager>(userdto));
         }
     }
 }

@@ -35,7 +35,9 @@ namespace SiparisYonetim.Infrastructure.Repositories
         public async Task Delete(Admin item)
         {
             item.Status = Status.Deleted;//Oluşturduğun entitynin status propertysinin değerini deleted yap
-            await UpdateAdminAsync(item);
+            var user = _dbContext.AppUsers.Where(x => x.Id == item.Id).FirstOrDefault();
+            user.Status = Status.Deleted;
+            var result = await _dbContext.SaveChangesAsync();
         }
 
         public async Task<Admin> FindAdminByEmailAsync(string email)
@@ -94,7 +96,11 @@ namespace SiparisYonetim.Infrastructure.Repositories
 
         public async Task<bool> UpdateAdminAsync(Admin admin, bool IsActive = true)
         {
-            _dbContext.Entry<Admin>(admin).State = EntityState.Modified;//Güncelleme Yap
+            //_dbContext.Entry<Admin>(admin).State = EntityState.Modified;//Güncelleme Yap
+
+
+            _dbContext.Set<Admin>().Update(admin);
+            var user = _dbContext.AppUsers.Where(x => x.Id == admin.Id).FirstOrDefault();
             var result = await _dbContext.SaveChangesAsync();
             if (result > 1)
             {

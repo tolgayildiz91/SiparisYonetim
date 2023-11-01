@@ -16,7 +16,7 @@ namespace SiparisYonetim.Application.Features.Admin.Commands
 {
     public class UpdateAdminCommand : IRequest<IResult>
     {
-        public AdminDTO AdminDTO { get; set; }
+        public UpdateAdminDTO AdminDTO { get; set; }
 
 
         public class UpdateAdminCommandHandler : IRequestHandler<UpdateAdminCommand, IResult>
@@ -32,7 +32,7 @@ namespace SiparisYonetim.Application.Features.Admin.Commands
 
             public async Task<IResult> Handle(UpdateAdminCommand request, CancellationToken cancellationToken)
             {
-                var result = await _adminService.UpdateAdminAsync(request.AdminDTO);
+                var result = await _adminService.UpdateAdminAsync(_mapper.Map<AdminDTO>(request));
                 if (result)
                 {
                     return new SuccessResult();

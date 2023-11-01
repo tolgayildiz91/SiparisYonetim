@@ -32,13 +32,7 @@ namespace SiparisYonetim.Infrastructure.Repositories
         {
             return await _table.AnyAsync(expression);
         }
-
-        public async Task Delete(Manager item)
-        {
-            item.Status = Status.Deleted;//Oluşturduğun entitynin status propertysinin değerini deleted yap
-            await UpdateManagerAsync(item);
-        }
-
+             
         public async Task<string> GeneratePassword()
         {
             const string UppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -81,15 +75,24 @@ namespace SiparisYonetim.Infrastructure.Repositories
            return await _table.FindAsync(managerId);
         }
 
+        public async Task Delete(Manager item)
+        {
+            item.Status = Status.Deleted;//Oluşturduğun entitynin status propertysinin değerini deleted yap
+
+            var user = _dbContext.AppUsers.Where(x => x.Id == item.Id).FirstOrDefault();
+            user.Status=Status.Deleted;
+            var result = await _dbContext.SaveChangesAsync();
+
+            //await UpdateManagerAsync(item);
+        }
         public async Task<bool> UpdateManagerAsync(Domain.Entities.Concrete.Manager manager, bool IsActive = true)
         {
-            _dbContext.Entry<Manager>(manager).State = EntityState.Modified;//Güncelleme Yap
-             var result = await _dbContext.SaveChangesAsync();
-            if (result > 1)
-            {
+            //_dbContext.Entry<Manager>(manager).State = EntityState.Modified;//Güncelleme Yap
+            _dbContext.Set<Manager>().Update(manager);
+            //var user = _dbContext.AppUsers.Where(x => x.Id == manager.Id).FirstOrDefault();
+
+            await _dbContext.SaveChangesAsync();
                 return true;
-            }
-            return false;
             
         }
         public async Task<Domain.Entities.Concrete.Manager> FindManagerByEmailAsync(string email)

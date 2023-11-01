@@ -30,8 +30,7 @@ namespace SiparisYonetim.Application.Features.Manager.Queries
             {
 
                 var managerEntity = await _managerService.GetUserId(request.ID);
-                ManagerDTO managerDTOs = _mapper.Map<ManagerDTO>(managerEntity);
-                return new SuccessDataResult<ManagerDTO>(managerDTOs);
+                return new SuccessDataResult<ManagerDTO>(_mapper.Map<ManagerDTO>(managerEntity));
 
 
             }

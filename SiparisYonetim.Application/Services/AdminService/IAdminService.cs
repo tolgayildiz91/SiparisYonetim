@@ -19,6 +19,7 @@ namespace SiparisYonetim.Application.Services.AdminService
         Task<Admin> FindAdminByNameAsync(string userName);
         Task<Admin> FindAdminByEmailAsync(string email);
         Task<bool> UpdateAdminAsync(AdminDTO adminDTO, bool IsActive = true);
+        Task DeleteAdminAsync(AdminDTO adminDto);
 
     }
 }
