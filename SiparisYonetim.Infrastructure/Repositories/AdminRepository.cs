@@ -50,13 +50,13 @@ namespace SiparisYonetim.Infrastructure.Repositories
         public async Task<Admin> FindAdminByEmailAsync(string email)
         {
             var AppUserResult = await _userManager.FindByEmailAsync(email);
-            return await GetAdminId(AppUserResult.Id.ToString());
+            return await GetAdminId(AppUserResult.Id);
         }
 
         public async Task<Admin> FindAdminByNameAsync(string userName)
         {
             var AppUserResult = await _userManager.FindByNameAsync(userName);
-            return await GetAdminId(AppUserResult.Id.ToString());
+            return await GetAdminId(AppUserResult.Id);
         }
 
         public async Task<string> GeneratePassword()
@@ -86,7 +86,7 @@ namespace SiparisYonetim.Infrastructure.Repositories
             return await Task.FromResult(shuffledPassword);
         }
 
-        public async Task<Admin> GetAdminId(string adminId)
+        public async Task<Admin> GetAdminId(Guid adminId)
         {
             return await _table.FindAsync(adminId);
         }

@@ -13,9 +13,6 @@
   <ItemGroup>
     <Folder Include="Features\Admin\Rules\" />
     <Folder Include="Features\Manager\Rules\" />
-    <Folder Include="Features\Roles\Commands\" />
-    <Folder Include="Features\Roles\Queries\" />
-    <Folder Include="Features\Roles\Profiles\" />
     <Folder Include="Features\Users\Commands\" />
   </ItemGroup>
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SiparisYonetim.Application.Features.Roles.DTOs
 {
-    public class RoleDTO
+    public class UpdateRoleDTO
     {
         public Guid Id { get; set; }
 

@@ -13,7 +13,7 @@ namespace SiparisYonetim.Domain.IRepositories
         Task<Admin> FindAdminByEmailAsync(string email);
         Task<Admin> FindAdminByNameAsync(string userName);
         Task<List<Admin>> GetAllAdmin();
-        Task<Admin> GetAdminId(string adminId);
+        Task<Admin> GetAdminId(Guid adminId);
         Task<bool> UpdateAdminAsync(Admin admin, bool IsActive = true);
 
 

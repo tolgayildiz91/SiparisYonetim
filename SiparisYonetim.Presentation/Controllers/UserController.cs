@@ -16,9 +16,6 @@ namespace SiparisYonetim.Presentation.Controllers
     [ApiController]
     public class UserController : BaseController
     {
-
-
-
         #region Manager
 
         [HttpPost]
@@ -78,9 +75,6 @@ namespace SiparisYonetim.Presentation.Controllers
   
 
         #endregion
-
-
-
         #region Admin
 
         [HttpPost]
@@ -138,13 +132,5 @@ namespace SiparisYonetim.Presentation.Controllers
         }
 
         #endregion
-
-
-
-
-
-
-
-
     }
 }
