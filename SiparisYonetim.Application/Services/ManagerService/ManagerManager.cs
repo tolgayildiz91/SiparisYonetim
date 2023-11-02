@@ -91,6 +91,9 @@ namespace SiparisYonetim.Application.Services.ManagerService
         public async Task<bool> UpdateManagerAsync(ManagerDTO userdto, bool IsActive = true)
         {
             userdto.ModifiedDate = DateTime.Now;
+
+
+
             return await _managerRepository.UpdateManagerAsync(_mapper.Map<Manager>(userdto), IsActive);
         }
 

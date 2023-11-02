@@ -86,7 +86,7 @@ namespace SiparisYonetim.Application.Services.AdminService
             return await _adminRepository.FindAdminByNameAsync(username);
         }
 
-        public async Task<Admin> GetAdminId(string adminId)
+        public async Task<Admin> GetAdminId(Guid adminId)
         {
             return await _adminRepository.GetAdminId(adminId);
         }

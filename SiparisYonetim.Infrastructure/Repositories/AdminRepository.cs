@@ -34,10 +34,17 @@ namespace SiparisYonetim.Infrastructure.Repositories
 
         public async Task Delete(Admin item)
         {
-            item.Status = Status.Deleted;//Oluşturduğun entitynin status propertysinin değerini deleted yap
-            var user = _dbContext.AppUsers.Where(x => x.Id == item.Id).FirstOrDefault();
-            user.Status = Status.Deleted;
-            var result = await _dbContext.SaveChangesAsync();
+            var existingAdmin = await _dbContext.Set<Admin>().FirstOrDefaultAsync(m => m.Id == item.Id);
+            if (existingAdmin != null)
+            {
+                existingAdmin.ModifiedBy = item.ModifiedBy;
+                existingAdmin.ModifiedDate = item.ModifiedDate;
+                existingAdmin.Status = Status.Deleted;//Oluşturduğun entitynin status propertysinin değerini deleted yap
+            }
+
+            _dbContext.Entry<Admin>(existingAdmin).State = EntityState.Modified;//Güncelleme Yap
+
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<Admin> FindAdminByEmailAsync(string email)
@@ -99,14 +106,31 @@ namespace SiparisYonetim.Infrastructure.Repositories
             //_dbContext.Entry<Admin>(admin).State = EntityState.Modified;//Güncelleme Yap
 
 
-            _dbContext.Set<Admin>().Update(admin);
-            var user = _dbContext.AppUsers.Where(x => x.Id == admin.Id).FirstOrDefault();
-            var result = await _dbContext.SaveChangesAsync();
-            if (result > 1)
+            try
             {
+                var existingAdmin = await _dbContext.Set<Admin>().FirstOrDefaultAsync(m => m.Id == admin.Id);
+                if (existingAdmin != null)
+                {
+                    existingAdmin.Picture = admin.Picture;
+                    existingAdmin.FirstName = admin.FirstName;
+                    existingAdmin.SecondFirstName = admin.SecondFirstName;
+                    existingAdmin.LastName = admin.LastName;
+                    existingAdmin.SecondLastName = admin.SecondLastName;
+                    existingAdmin.Gender = admin.Gender;
+                    existingAdmin.ModifiedBy = admin.ModifiedBy;
+                    existingAdmin.ModifiedDate = admin.ModifiedDate;
+                    existingAdmin.Status = admin.Status;
+                }
+
+                _dbContext.Entry<Admin>(existingAdmin).State = EntityState.Modified;//Güncelleme Yap
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
-            return false;
+            catch (DbUpdateConcurrencyException)
+            {
+                // Hata durumunda uygun bir şekilde işleyin veya loglayın
+                return false;
+            }
         }
 
         public async Task<bool> AddAsync(Admin item)

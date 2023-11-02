@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SiparisYonetim.Domain.Entities.Abstract;
 using SiparisYonetim.Domain.Entities.Concrete;
 using SiparisYonetim.Domain.Enums;
 using SiparisYonetim.Domain.IRepositories;
@@ -77,23 +78,49 @@ namespace SiparisYonetim.Infrastructure.Repositories
 
         public async Task Delete(Manager item)
         {
-            item.Status = Status.Deleted;//Oluşturduğun entitynin status propertysinin değerini deleted yap
+            var existingManager = await _dbContext.Set<Manager>().FirstOrDefaultAsync(m => m.Id == item.Id);
+            if (existingManager != null)
+            {
+                existingManager.ModifiedBy = item.ModifiedBy;
+                existingManager.ModifiedDate = item.ModifiedDate;
+                existingManager.Status = Status.Deleted;//Oluşturduğun entitynin status propertysinin değerini deleted yap
+            }
 
-            var user = _dbContext.AppUsers.Where(x => x.Id == item.Id).FirstOrDefault();
-            user.Status=Status.Deleted;
-            var result = await _dbContext.SaveChangesAsync();
+            _dbContext.Entry<Manager>(existingManager).State = EntityState.Modified;//Güncelleme Yap
 
-            //await UpdateManagerAsync(item);
+            await _dbContext.SaveChangesAsync();
+
         }
         public async Task<bool> UpdateManagerAsync(Domain.Entities.Concrete.Manager manager, bool IsActive = true)
         {
-            //_dbContext.Entry<Manager>(manager).State = EntityState.Modified;//Güncelleme Yap
-            _dbContext.Set<Manager>().Update(manager);
-            //var user = _dbContext.AppUsers.Where(x => x.Id == manager.Id).FirstOrDefault();
 
-            await _dbContext.SaveChangesAsync();
+            try
+            {
+                var existingManager = await _dbContext.Set<Manager>().FirstOrDefaultAsync(m => m.Id == manager.Id);
+                if (existingManager != null)
+                {
+                    existingManager.Picture = manager.Picture;
+                    existingManager.FirstName = manager.FirstName;
+                    existingManager.SecondFirstName = manager.SecondFirstName;
+                    existingManager.LastName = manager.LastName;
+                    existingManager.SecondLastName = manager.SecondLastName;
+                    existingManager.Gender = manager.Gender;
+                    existingManager.ModifiedBy = manager.ModifiedBy;
+                    existingManager.ModifiedDate = manager.ModifiedDate;
+                    existingManager.Status = manager.Status;
+                    existingManager.BranchID = manager.BranchID;
+                }
+
+                _dbContext.Entry<Manager>(existingManager).State = EntityState.Modified;//Güncelleme Yap
+                await _dbContext.SaveChangesAsync();
                 return true;
-            
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Hata durumunda uygun bir şekilde işleyin veya loglayın
+                return false;
+            }
+
         }
         public async Task<Domain.Entities.Concrete.Manager> FindManagerByEmailAsync(string email)
         {

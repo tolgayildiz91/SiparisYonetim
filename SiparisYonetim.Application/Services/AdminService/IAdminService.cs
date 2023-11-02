@@ -12,7 +12,7 @@ namespace SiparisYonetim.Application.Services.AdminService
     public interface IAdminService
     {
         Task<List<Admin>> GetAllAdmins();
-        Task<Admin> GetAdminId(string adminId);
+        Task<Admin> GetAdminId(Guid adminId);
         Task<Admin> GetAdminByUserName(string username);
         Task<bool> CreateAdminAsync(CreateAdminDTO createAdminDTO);
         Task<bool> AddToRoleAsync(string userName, string roleName);

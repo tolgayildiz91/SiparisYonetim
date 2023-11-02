@@ -1,8 +1,10 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SiparisYonetim.Application.Features.Admin.Commands;
 using SiparisYonetim.Application.Features.Admin.DTOs;
+using SiparisYonetim.Application.Features.Admin.Queries;
 using SiparisYonetim.Application.Features.Manager.Commands;
 using SiparisYonetim.Application.Features.Manager.DTOs;
 using SiparisYonetim.Application.Features.Manager.Queries;
@@ -44,6 +46,14 @@ namespace SiparisYonetim.Presentation.Controllers
             return BadRequest();
 
         }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteManager(Guid ID)
+        {
+
+            await Mediator.Send(new DeleteManagerCommand() { ID = ID });
+
+            return Ok();
+        }
         [HttpGet]
         public async Task<IActionResult> GetAllManager()
         {
@@ -65,23 +75,13 @@ namespace SiparisYonetim.Presentation.Controllers
             }
             return BadRequest();
         }
-        [HttpDelete]
-        public async Task<IActionResult> DeleteManager(Guid ID)
-        {
-
-            await Mediator.Send(new DeleteManagerCommand() { ID=ID});
-
-            return Ok();
-        }
-
-
+  
 
         #endregion
 
 
 
         #region Admin
-
 
         [HttpPost]
         public async Task<IActionResult> CreateAdmin(CreateAdminDTO createAdminDTO)
@@ -107,10 +107,35 @@ namespace SiparisYonetim.Presentation.Controllers
             return BadRequest();
 
         }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAdmin(Guid ID)
+        {
+
+            await Mediator.Send(new DeleteAdminCommand() { ID = ID });
+            return Ok();
+
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllAdmin()
+        {
+            var result = await Mediator.Send(new GetAdminsQuery());
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest();
+
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAdminById(Guid ID)
+        {
+
+            var result = await Mediator.Send(new GetAdminByIDQuery(){ ID=ID});
 
 
-
-
+            return Ok();
+        }
 
         #endregion
 
